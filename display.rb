@@ -76,7 +76,7 @@ if __FILE__ == $PROGRAM_NAME
   disp.render
   while true
     disp.cursor.get_input
-    system("clear")
+    puts `clear`
     disp.render
   end
 end

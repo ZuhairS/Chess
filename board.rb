@@ -1,9 +1,11 @@
 require_relative 'piece'
 
-class Board
 
-  BACKROW_W = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
-  BACKROW_B = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
+BACKROW_W = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
+BACKROW_B = [Rook.new(:black), Knight.new(:black), Bishop.new(:black), Queen.new(:black), King.new(:black), Bishop.new(:black), Knight.new(:black), Rook.new(:black)]
+
+
+class Board
 
   attr_reader :board
   def initialize()
@@ -57,14 +59,20 @@ class Board
   protected
 
   def make_starting_grid
-    BACKROW_B.each_with_index do |piece, idx|
-      pos = [0, idx]
+    BACKROW_B.each_with_index do |piece, col|
+      pos = [0, col]
       self[pos] = piece
     end
-    BACKROW_W.each_with_index do |piece, idx|
-      pos = [7, idx]
+    BACKROW_W.each_with_index do |piece, col|
+      pos = [7, col]
       self[pos] = piece
     end
+
+    (0..7).each do |col|
+      @board[1][col] = Pawn.new(:black)
+      @board[6][col] = Pawn.new
+    end
+
 
   end
 

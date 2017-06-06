@@ -14,7 +14,7 @@ end
 
 class Rook
   attr_reader :value
-  def initialize
+  def initialize(color = :white)
     @value = "R"
   end
 
@@ -24,7 +24,7 @@ end
 
 class Queen
   attr_reader :value
-  def initialize
+  def initialize(color = :white)
     @value = "Q"
   end
 
@@ -34,7 +34,7 @@ end
 
 class Bishop
   attr_reader :value
-  def initialize
+  def initialize(color = :white)
     @value = "B"
   end
 
@@ -44,14 +44,14 @@ end
 
 class Knight
   attr_reader :value
-  def initialize
+  def initialize(color = :white)
     @value = "N"
   end
 end
 
 class King
   attr_reader :value
-  def initialize
+  def initialize(color = :white)
     @value = "K"
   end
 end
@@ -71,7 +71,7 @@ end
 
 class Pawn
   attr_reader :value
-  def initialize
+  def initialize(color = :white)
     @value = "P"
   end
 end
