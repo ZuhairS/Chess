@@ -1,5 +1,16 @@
 require 'singleton'
 
+# MOVES = {
+#   left: [0, -1],
+#   right: [0, 1],
+#   up: [-1, 0],
+#   down: [1, 0],
+#   up_right: [-1, 1],
+#   up_left: [-1, -1],
+#   down_right: [1, 1],
+#   down_left: [1, -1]
+# }
+
 class Piece
   attr_reader :value
 
@@ -7,52 +18,64 @@ class Piece
     @color = color
   end
   def moves
-
+    move_dirs
   end
 end
 
 
-class Rook
+class Rook < Piece
   attr_reader :value
-  def initialize(color = :white)
-    @value = "R"
+  def value
+    "R"
   end
 
   def move_dirs
   end
 end
 
-class Queen
-  attr_reader :value
-  def initialize(color = :white)
-    @value = "Q"
+class Queen < Piece
+  def value
+    "Q"
   end
 
   def move_dirs
   end
 end
 
-class Bishop
-  attr_reader :value
-  def initialize(color = :white)
-    @value = "B"
+class Bishop < Piece
+  def value
+    "B"
   end
 
   def move_dirs
   end
 end
 
-class Knight
-  attr_reader :value
-  def initialize(color = :white)
-    @value = "N"
+class Knight < Piece
+  def value
+    "N"
   end
 end
 
-class King
-  attr_reader :value
-  def initialize(color = :white)
-    @value = "K"
+class King < Piece
+  def value
+    "K"
+  end
+end
+
+
+
+class Pawn < Piece
+  def value
+    "P"
+  end
+
+  def move_dirs
+    valid_move_array = []
+    x , y = self.pos
+    if @board[x][y+1] == NullPiece
+      valid_move_array << [x,y+1]
+    end
   end
 end
 
@@ -69,19 +92,7 @@ class NullPiece < Piece
 
 end
 
-class Pawn
-  attr_reader :value
-  def initialize(color = :white)
-    @value = "P"
-  end
-end
 
-
-
-module SlidingPiece
-  def moves
-  end
-end
 
 module SteppingPiece
   def moves

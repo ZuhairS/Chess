@@ -56,6 +56,7 @@ class Board
     true
   end
 
+
   protected
 
   def make_starting_grid
