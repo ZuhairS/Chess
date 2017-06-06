@@ -10,10 +10,11 @@ class Piece
 
 end
 
-class NullPiece < Piece
+class NullPiece # < Piece
+  attr_reader :value
 
   def initialize
-
+    @value = "#"
   end
 
 end

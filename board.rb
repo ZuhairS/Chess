@@ -1,9 +1,10 @@
 require_relative 'piece'
 
 class Board
-
+  attr_reader :board
   def initialize()
-    @board = Array.new(8) { Array.new(8){ NullPiece.new } }
+    @null_piece = NullPiece.instance
+    @board = Array.new(8) { Array.new(8){ @null_piece } }
     make_starting_grid
   end
 
@@ -32,12 +33,21 @@ class Board
       #call turn method here again
     end
     self[end_pos] = self[start_pos]
-    self[start_pos] = NullPiece.new
+    self[start_pos] = @null_piece
   end
 
 
   def checkmate?
 
+  end
+
+  def in_bound?(pos)
+    row, col = pos
+    range = (0..7)
+    unless range.include?(row) && range.include?(col)
+      return false
+    end
+    true
   end
 
   protected

@@ -32,11 +32,11 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board
-
+  attr_reader :cursor_pos, :board, :selected
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @selected = false
   end
 
   def get_input
@@ -44,7 +44,7 @@ class Cursor
     handle_key(key)
   end
 
-  private
+  # private
 
   def read_char
     STDIN.echo = false # stops the console from printing return values
@@ -76,8 +76,33 @@ class Cursor
   end
 
   def handle_key(key)
+    case key
+    when :return, :space
+      toggle_selected
+      @cursor_pos
+    when :left
+      update_pos [-1,0]
+    when :right
+      update_pos [1,0]
+    when :up
+      update_pos [0,-1]
+    when :down
+      update_pos [0,1]
+    when :ctrl_c
+      Process.exit(0)
+    end
+
+  end
+
+  def toggle_selected
+    @selected = !@selected
   end
 
   def update_pos(diff)
+    row, col = diff
+    cur_row, cur_col = @cursor_pos
+    if @board.in_bound?([cur_row + row, cur_col + col])
+      @cursor_pos = [cur_row + row, cur_col + col]
+    end
   end
 end
