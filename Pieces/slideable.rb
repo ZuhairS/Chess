@@ -28,6 +28,7 @@ module SlidingPiece
   end
 
   def list_valid_moves_in_dir(row, col)
-    
+
+
   end
 end

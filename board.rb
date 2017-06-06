@@ -1,8 +1,9 @@
 require_relative 'piece'
+require "byebug"
 
 
-BACKROW_W = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
-BACKROW_B = [Rook.new(:black), Knight.new(:black), Bishop.new(:black), Queen.new(:black), King.new(:black), Bishop.new(:black), Knight.new(:black), Rook.new(:black)]
+BACKROW = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+
 
 
 class Board
@@ -60,18 +61,18 @@ class Board
   protected
 
   def make_starting_grid
-    BACKROW_B.each_with_index do |piece, col|
+    BACKROW.each_with_index do |piece, col|
       pos = [0, col]
-      self[pos] = piece
+      self[pos] = piece.new(self, pos, :black)
     end
-    BACKROW_W.each_with_index do |piece, col|
+    BACKROW.each_with_index do |piece, col|
       pos = [7, col]
-      self[pos] = piece
+      self[pos] = piece.new(self, pos)
     end
 
     (0..7).each do |col|
-      @board[1][col] = Pawn.new(:black)
-      @board[6][col] = Pawn.new
+      @board[1][col] = Pawn.new(self, [1, col], :black)
+      @board[6][col] = Pawn.new(self, [6, col])
     end
 
 

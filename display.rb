@@ -58,9 +58,9 @@ class Display
     (0...@board.board.length).each do |row|
       (0...@board.board[0].length).each do |col|
         if @cursor.cursor_pos == [row, col]
-          print " " + @board.board[row][col].value.colorize(background: selected_color)
+          print " " + @board.board[row][col].symbol.colorize(background: selected_color)
         else
-          print " " + @board.board[row][col].value.colorize(background: background_color)
+          print " " + @board.board[row][col].symbol.colorize(background: background_color)
         end
         background_color_toggle unless col == 7
       end

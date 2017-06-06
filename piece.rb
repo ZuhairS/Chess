@@ -12,9 +12,13 @@ require 'singleton'
 # }
 
 class Piece
-  attr_reader :value
+  attr_reader :board, :color
+  attr_accessor :pos
 
-  def initialize(color = :white)
+  def initialize(board, pos, color = :white)
+    @board = board
+    # raise "Invalid position" unless @board.in_bound?(pos)
+    @pos = pos
     @color = color
   end
   def moves
@@ -24,8 +28,8 @@ end
 
 
 class Rook < Piece
-  attr_reader :value
-  def value
+  attr_reader :symbol
+  def symbol
     "R"
   end
 
@@ -34,7 +38,7 @@ class Rook < Piece
 end
 
 class Queen < Piece
-  def value
+  def symbol
     "Q"
   end
 
@@ -43,7 +47,7 @@ class Queen < Piece
 end
 
 class Bishop < Piece
-  def value
+  def symbol
     "B"
   end
 
@@ -52,13 +56,13 @@ class Bishop < Piece
 end
 
 class Knight < Piece
-  def value
+  def symbol
     "N"
   end
 end
 
 class King < Piece
-  def value
+  def symbol
     "K"
   end
 end
@@ -66,7 +70,7 @@ end
 
 
 class Pawn < Piece
-  def value
+  def symbol
     "P"
   end
 
@@ -83,11 +87,10 @@ end
 class NullPiece < Piece
   include Singleton
 
-  attr_reader :value
+  attr_reader :symbol
 
   def initialize
-    @value = "#"
-    super(nil)
+    @symbol = "#"
   end
 
 end
