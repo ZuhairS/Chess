@@ -9,28 +9,60 @@ class Display
   def initialize(board)
     @board = board
     @cursor = Cursor.new([0, 0], board)
+    @b_color
   end
 
 
   def selected_color
 
+   # :black,
+   # :light_black,
+   # :red,
+   # :light_red,
+   # :green,
+   # :light_green,
+   # :yellow,
+   # :light_yellow,
+   # :blue,
+   # :light_blue,
+   # :magenta,
+   # :light_magenta,
+   # :cyan,
+   # :light_cyan,
+   # :white,
+   # :light_white,
+   # :default
+
     if @cursor.selected
-      :blue
+      :light_red
     else
-      :red
+      :light_green
     end
 
   end
 
-  def render
+  def background_color
+    if @b_color
+      :white
+    else
+      :light_white
+    end
+  end
 
+  def background_color_toggle
+    @b_color = !@b_color
+  end
+
+  def render
+    background_color
     (0...@board.board.length).each do |row|
       (0...@board.board[0].length).each do |col|
         if @cursor.cursor_pos == [row, col]
           print " " + @board.board[row][col].value.colorize(background: selected_color)
         else
-          print " " + @board.board[row][col].value
+          print " " + @board.board[row][col].value.colorize(background: background_color)
         end
+        background_color_toggle unless col == 7
       end
       puts
     end

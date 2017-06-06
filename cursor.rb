@@ -81,13 +81,13 @@ class Cursor
       toggle_selected
       @cursor_pos
     when :left
-      update_pos [-1,0]
+      update_pos MOVES[:left]
     when :right
-      update_pos [1,0]
+      update_pos MOVES[:right]
     when :up
-      update_pos [0,-1]
+      update_pos MOVES[:up]
     when :down
-      update_pos [0,1]
+      update_pos MOVES[:down]
     when :ctrl_c
       Process.exit(0)
     end

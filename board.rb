@@ -1,6 +1,10 @@
 require_relative 'piece'
 
 class Board
+
+  BACKROW_W = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
+  BACKROW_B = [Rook.new, Knight.new, Bishop.new, Queen.new, King.new, Bishop.new, Knight.new, Rook.new]
+
   attr_reader :board
   def initialize()
     @null_piece = NullPiece.instance
@@ -28,10 +32,10 @@ class Board
       puts "Space has no piece to move."
       #call turn method here again
     end
-    unless self[start_pos].valid_move?(end_pos)
-      puts "Invalid move location."
-      #call turn method here again
-    end
+    # unless self[start_pos].valid_move?(end_pos)
+    #   puts "Invalid move location."
+    #   #call turn method here again
+    # end
     self[end_pos] = self[start_pos]
     self[start_pos] = @null_piece
   end
@@ -53,12 +57,14 @@ class Board
   protected
 
   def make_starting_grid
-    # BACKROW_B.each_with_index do |piece, idx|
-    #   @board[0][idx] = piece
-    # end
-    # BACKROW_W.each_with_index do |piece, idx|
-    #   @board[7][idx] = piece
-    # end
+    BACKROW_B.each_with_index do |piece, idx|
+      pos = [0, idx]
+      self[pos] = piece
+    end
+    BACKROW_W.each_with_index do |piece, idx|
+      pos = [7, idx]
+      self[pos] = piece
+    end
 
   end
 
