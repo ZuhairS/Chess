@@ -28,9 +28,12 @@ end
 
 
 class Rook < Piece
-  attr_reader :symbol
   def symbol
-    "R"
+    if color == :white
+      "♖"
+    else
+      '♜'
+    end
   end
 
   def move_dirs
@@ -39,16 +42,23 @@ end
 
 class Queen < Piece
   def symbol
-    "Q"
+    if color == :white
+      "♕"
+    else
+      '♛'
+    end
   end
-
   def move_dirs
   end
 end
 
 class Bishop < Piece
   def symbol
-    "B"
+    if color == :white
+      "♗"
+    else
+      '♝'
+    end
   end
 
   def move_dirs
@@ -57,13 +67,21 @@ end
 
 class Knight < Piece
   def symbol
-    "N"
+    if color == :white
+      "♘"
+    else
+      '♞'
+    end
   end
 end
 
 class King < Piece
   def symbol
-    "K"
+    if color == :white
+      "♔"
+    else
+      '♚'
+    end
   end
 end
 
@@ -71,7 +89,11 @@ end
 
 class Pawn < Piece
   def symbol
-    "P"
+    if color == :white
+      "♙"
+    else
+      '♟'
+    end
   end
 
   def move_dirs
@@ -90,7 +112,7 @@ class NullPiece < Piece
   attr_reader :symbol
 
   def initialize
-    @symbol = "#"
+    @symbol = " "
   end
 
 end
