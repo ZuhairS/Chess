@@ -1,6 +1,8 @@
+# NOT COMPLETE AT ALL
 require_relative "piece"
 
-module SlidingPiece
+
+module StepablePiece
   HOR_MOVES = {
     left: [0, -1],
     right: [0, 1],
